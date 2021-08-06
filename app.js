@@ -1,6 +1,7 @@
 ////////////////// import process module from Node
 const process = require('process');
 const os = require('os');
+const fs = require("fs");
 
 ////////////////// language objects
 const STRING_DATA_COLLECTION_EN =
@@ -59,6 +60,15 @@ let STRING_DATA_COLLECTION =
 };
 
 ////////////////// function 
+//write/update HTML to show data on browser
+const createHTML = () => {
+	const html = fs.readFileSync(`${__dirname}/index.html`);
+	fs.writeFileSync(`${process.cwd()}/index.html`, html);
+};
+createHTML();
+//export
+module.exports = createHTML;
+
 //set language 
 const setLanguage = (LanguageCollectionToUse) => {
 	// We change the language by overwriting the active one with the one chosen
@@ -129,19 +139,14 @@ class Application {
 	}
 	//#1
 	setLang() {
-		switch (this.CommandLineArguments[1]) {
-			case "JP":
-				console.log("Changed to Japanese");
-				setLanguage(STRING_DATA_COLLECTION_JP); //doesn't do anything...
-				break;
-			default:
-				break;
+		if (this.CommandLineArguments.some(e => e === "JP")) {
+			console.log("Language Changed to Japanese");
+			setLanguage(STRING_DATA_COLLECTION_JP); //doesn't do anything...
 		}
-
 	}
 	//#2
 	showOsData() {
-		if (this.CommandLineArguments[1] === "os") {
+		if (this.CommandLineArguments.some(e => e === "os")) {
 			console.log("hostname is ", os.hostname());
 			console.log("userInfo is ", os.userInfo());
 			console.log("version is ", os.version());
@@ -149,6 +154,10 @@ class Application {
 			console.log("release is ", os.release());
 			console.log("totalmem (bytes) is ", os.totalmem());
 		}
+	}
+	//#3
+	showCPUData() {
+
 	}
 }
 
@@ -163,7 +172,7 @@ let listOfArgument = [];
 
 for (let i = 1; i < process.argv.length; i++) {
 	listOfArgument.push(process.argv[i]);
-	//console.log("list of command line argument is", listOfArgument);
+	console.log("list of command line argument is", listOfArgument);
 }
 
 //instantiate
@@ -176,6 +185,8 @@ myApplication.showCommandLine();
 myApplication.setLang();
 //#2 : show OS data
 myApplication.showOsData();
+//#3 : show CPU data
+myApplication.showCPUData();
 
 
 /* Assignment */

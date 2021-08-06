@@ -1,0 +1,22 @@
+{
+  "name": "simplecli",
+  "version": "1.0.0",
+  "description": "WMAD Node class",
+  "main": "app.js",
+  "bin": {
+    "greeting": "bash"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YukiRamu/Node.js-CLI-Editor.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YukiRamu/Node.js-CLI-Editor/issues"
+  },
+  "homepage": "https://github.com/YukiRamu/Node.js-CLI-Editor#readme"
+}
