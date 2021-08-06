@@ -59,7 +59,7 @@ let STRING_DATA_COLLECTION =
 	StartupMessage: undefined
 };
 
-////////////////// function 
+//////////////////  function  ///////////////// 
 //write/update HTML to show data on browser
 const createHTML = () => {
 	const html = fs.readFileSync(`${__dirname}/index.html`);
@@ -68,6 +68,11 @@ const createHTML = () => {
 createHTML();
 //export
 module.exports = createHTML;
+
+fs.readFile("bear.txt", (error, data)=> {
+  const bear = data.toString().split("\n")
+  console.log(bear)
+})
 
 //set language 
 const setLanguage = (LanguageCollectionToUse) => {
@@ -96,7 +101,7 @@ console.log(getMsg("WaitMessage"));
 //read keyboard
 process.stdin.resume();
 
-// stop node application
+// stop node application when Ctl+c is clicked
 process.on('SIGINT', () => {
 	console.log("Stopping Node.js Application. See you soon :)");
 	process.exit();
@@ -157,7 +162,10 @@ class Application {
 	}
 	//#3
 	showCPUData() {
-
+		if (this.CommandLineArguments.some(e => e === "cpu")) {
+			console.log("CPU core is ", os.cpus());
+			console.log("CPU architecture is", os.arch());
+		}
 	}
 }
 
@@ -189,10 +197,3 @@ myApplication.showOsData();
 myApplication.showCPUData();
 
 
-/* Assignment */
-// node yourapp.js --os
-// node yourapp.js os
-// node yourapp.js arch
-// node yourapp.js os arch
-// node yourapp.js cpu
-// node yourapp.js cpu os arch

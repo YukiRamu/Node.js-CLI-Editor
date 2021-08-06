@@ -7,7 +7,8 @@
     "greeting": "bash"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon app.js",
+    "test": "nodemon --inspect app.js"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/YukiRamu/Node.js-CLI-Editor/issues"
   },
-  "homepage": "https://github.com/YukiRamu/Node.js-CLI-Editor#readme"
+  "homepage": "https://github.com/YukiRamu/Node.js-CLI-Editor#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
 }
